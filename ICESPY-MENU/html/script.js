@@ -174,6 +174,7 @@ window.addEventListener("message", (event) => {
                 !Array.isArray(data.player)
             ) {
                 updatePlayerDashboard(data.player);
+                registerDashboardUpdate();
 
                 console.log(
                     "[ICESPY] Player Dashboard updated"
@@ -189,6 +190,7 @@ window.addEventListener("message", (event) => {
                 !Array.isArray(data.vehicle)
             ) {
                 updateVehicleDashboard(data.vehicle);
+                registerDashboardUpdate();
 
                 console.log(
                     "[ICESPY] Vehicle Dashboard updated"
