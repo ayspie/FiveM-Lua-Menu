@@ -1,7 +1,7 @@
 
 /* ==========================================
    ICESPY MENU - JavaScript Controller
-   Version: 1.4.0
+   Version: 1.5.0
    Theme: Blue & Black
    ========================================== */
 
