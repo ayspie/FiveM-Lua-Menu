@@ -981,3 +981,91 @@ input:focus-visible {
     }
 }
 
+
+/* ==========================================
+   ICESPY v1.5.0 - CONNECTION MONITOR
+   ========================================== */
+
+.connection-monitor {
+    margin-top: 14px;
+    padding: 15px;
+    background: rgba(10, 18, 32, 0.88);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.connection-monitor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.connection-monitor-header h4 {
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+.connection-state {
+    padding: 6px 10px;
+    border: 1px solid #55708D;
+    border-radius: 6px;
+    color: #A8BCD0;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.connection-state.active {
+    color: #4ADE80;
+    border-color: #4ADE80;
+    background: rgba(74, 222, 128, 0.09);
+}
+
+.connection-state.stale {
+    color: #FBBF24;
+    border-color: #FBBF24;
+    background: rgba(251, 191, 36, 0.09);
+}
+
+.connection-monitor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.connection-monitor-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+    padding: 11px 12px;
+    background: rgba(0, 126, 199, 0.08);
+    border-radius: 7px;
+}
+
+.connection-monitor-item span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.connection-monitor-item strong {
+    color: #62C4FF;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+#connection-description {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .connection-monitor-grid {
+        grid-template-columns: 1fr;
+    }
+}
