@@ -811,3 +811,25 @@ input:focus-visible {
         transform: none;
     }
 }
+
+
+/* ICESPY v1.3.0 - DASHBOARD SPACING */
+
+#home.tab {
+    padding-top: 18px;
+}
+
+#home .dashboard-card {
+    min-height: 75px;
+    padding: 12px 16px;
+}
+
+#home .dashboard-grid {
+    gap: 10px;
+    margin-top: 12px;
+}
+
+#home .dashboard-actions {
+    margin-top: 14px;
+    padding-bottom: 20px;
+}
