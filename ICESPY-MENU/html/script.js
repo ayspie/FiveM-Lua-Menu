@@ -438,3 +438,50 @@ animationToggle?.addEventListener("change", () => {
     );
 });
 
+
+/* ==========================================
+   ICESPY v1.3.0 - ADVANCED DASHBOARD
+   ========================================== */
+
+// SESSION TIMER
+const sessionStartTime = Date.now();
+const sessionTimer = document.getElementById("session-timer");
+
+function updateSessionTimer() {
+    if (!sessionTimer) return;
+
+    const elapsed = Math.floor(
+        (Date.now() - sessionStartTime) / 1000
+    );
+
+    const hours = String(
+        Math.floor(elapsed / 3600)
+    ).padStart(2, "0");
+
+    const minutes = String(
+        Math.floor((elapsed % 3600) / 60)
+    ).padStart(2, "0");
+
+    const seconds = String(
+        elapsed % 60
+    ).padStart(2, "0");
+
+    sessionTimer.textContent =
+        `${hours}:${minutes}:${seconds}`;
+}
+
+updateSessionTimer();
+setInterval(updateSessionTimer, 1000);
+
+// QUICK ACTION BUTTONS
+document.querySelectorAll("[data-open-tab]").forEach((button) => {
+    button.addEventListener("click", () => {
+        const tabName = button.dataset.openTab;
+
+        // Uses your existing navigation controller.
+        switchTab(tabName);
+    });
+});
+
+console.log("[ICESPY] Advanced Dashboard initialized");
+
