@@ -186,14 +186,3 @@ console.log("       ICESPY MENU v1.1         ");
 console.log("       UI Initialized           ");
 console.log("================================");
 
-
-/* ICESPY - Message Controller Diagnostic */
-
-setTimeout(() => {
-    console.log("[ICESPY] Testing message listener...");
-
-    window.postMessage({
-        action: "switchTab",
-        tab: "settings"
-    }, window.location.origin);
-}, 2000);
