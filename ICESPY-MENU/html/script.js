@@ -201,5 +201,79 @@ function updateIcespyClock() {
 
 updateIcespyClock();
 
+
+/* ICESPY v1.2 - APPEARANCE CONTROLS */
+
+const glowSlider = document.getElementById("glow-slider");
+const opacitySlider = document.getElementById("opacity-slider");
+const animationToggle = document.getElementById("animation-toggle");
+const resetThemeButton = document.getElementById("reset-theme");
+
+const defaultTheme = {
+    glow: 50,
+    opacity: 85,
+    animated: true
+};
+
+function applyTheme(settings) {
+    const glow = Math.max(0, Math.min(100, Number(settings.glow)));
+    const opacity = Math.max(30, Math.min(100, Number(settings.opacity)));
+
+    glowSlider.value = glow;
+    opacitySlider.value = opacity;
+    animationToggle.checked = settings.animated;
+
+    document.getElementById("glow-value").textContent = glow + "%";
+    document.getElementById("opacity-value").textContent = opacity + "%";
+
+    menu.style.background = `rgba(11, 15, 25, ${opacity / 100})`;
+
+    menu.style.setProperty(
+        "--glow-strength",
+        glow / 100
+    );
+
+    menu.classList.toggle("no-animation", !settings.animated);
+}
+
+function saveTheme() {
+    const settings = {
+        glow: Number(glowSlider.value),
+        opacity: Number(opacitySlider.value),
+        animated: animationToggle.checked
+    };
+
+    applyTheme(settings);
+
+    try {
+        localStorage.setItem("icespy-theme", JSON.stringify(settings));
+    } catch (error) {
+        console.warn("[ICESPY] Theme could not be saved:", error);
+    }
+}
+
+glowSlider.addEventListener("input", saveTheme);
+opacitySlider.addEventListener("input", saveTheme);
+animationToggle.addEventListener("change", saveTheme);
+
+resetThemeButton.addEventListener("click", () => {
+    applyTheme(defaultTheme);
+    saveTheme();
+});
+
+let savedTheme = defaultTheme;
+
+try {
+    const stored = JSON.parse(localStorage.getItem("icespy-theme"));
+    if (stored && typeof stored === "object") {
+        savedTheme = { ...defaultTheme, ...stored };
+    }
+} catch (error) {
+    console.warn("[ICESPY] Using default appearance.");
+}
+
+applyTheme(savedTheme);
+
+
 setInterval(updateIcespyClock, 1000);
 
