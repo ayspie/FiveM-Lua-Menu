@@ -633,6 +633,92 @@ updateVehicleDashboard();
 console.log("[ICESPY] Player & Vehicle dashboard controller ready");
 
 
+/* ==========================================
+   ICESPY v1.5.0 - CONNECTION MONITOR
+   ========================================== */
+
+const CONNECTION_TIMEOUT = 15000;
+
+const connectionState = document.getElementById("connection-state");
+const connectionSource = document.getElementById("connection-source");
+const connectionLastUpdate = document.getElementById(
+    "connection-last-update"
+);
+const connectionDescription = document.getElementById(
+    "connection-description"
+);
+
+let lastDataUpdate = null;
+let connectionMode = "preview";
+
+function updateConnectionDisplay() {
+    if (!connectionState) return;
+
+    const now = Date.now();
+
+    if (
+        lastDataUpdate !== null &&
+        now - lastDataUpdate > CONNECTION_TIMEOUT
+    ) {
+        if (connectionMode !== "stale") {
+            connectionMode = "stale";
+
+            // Remove outdated dashboard values.
+            updatePlayerDashboard();
+            updateVehicleDashboard();
+
+            console.log("[ICESPY] Data connection timed out");
+        }
+    }
+
+    connectionState.classList.remove(
+        "preview",
+        "active",
+        "stale"
+    );
+
+    connectionState.classList.add(connectionMode);
+
+    if (connectionMode === "active") {
+        connectionState.textContent = "DATA ACTIVE";
+        connectionSource.textContent = "Dashboard Messages";
+        connectionDescription.textContent =
+            "Recent dashboard updates have been received.";
+    } else if (connectionMode === "stale") {
+        connectionState.textContent = "DATA STALE";
+        connectionSource.textContent = "No Recent Updates";
+        connectionDescription.textContent =
+            "Dashboard updates stopped arriving. Old values were cleared.";
+    } else {
+        connectionState.textContent = "PREVIEW MODE";
+        connectionSource.textContent = "Browser Preview";
+        connectionDescription.textContent =
+            "No live data feed is connected. Waiting for dashboard updates.";
+    }
+
+    if (lastDataUpdate === null) {
+        connectionLastUpdate.textContent = "Waiting";
+    } else {
+        const secondsAgo = Math.floor(
+            (now - lastDataUpdate) / 1000
+        );
+
+        connectionLastUpdate.textContent =
+            secondsAgo === 0
+                ? "Just now"
+                : `${secondsAgo}s ago`;
+    }
+}
+
+function registerDashboardUpdate() {
+    lastDataUpdate = Date.now();
+    connectionMode = "active";
+    updateConnectionDisplay();
+}
+
+updateConnectionDisplay();
+setInterval(updateConnectionDisplay, 1000);
+
 
 
 
