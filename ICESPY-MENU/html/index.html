@@ -4,59 +4,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICESPY MENU</title>
+
+    <title>ICESPY MENU v1.2.0</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+    <!-- ICESPY MAIN MENU -->
     <div id="menu" class="menu hidden">
+
+        <!-- SIDEBAR -->
         <aside class="sidebar">
+
             <div class="brand">
                 <h1>ICESPY</h1>
                 <p>PREMIUM LUA MENU</p>
             </div>
 
+            <!-- NAVIGATION -->
             <nav>
-                <button class="nav-btn active" data-tab="home">Home</button>
-                <button class="nav-btn" data-tab="player">Player</button>
-                <button class="nav-btn" data-tab="vehicle">Vehicle</button>
-                <button class="nav-btn" data-tab="settings">Settings</button>
+                <button class="nav-btn active" data-tab="home">
+                    Home
+                </button>
+
+                <button class="nav-btn" data-tab="player">
+                    Player
+                </button>
+
+                <button class="nav-btn" data-tab="vehicle">
+                    Vehicle
+                </button>
+
+                <button class="nav-btn" data-tab="settings">
+                    Settings
+                </button>
             </nav>
 
-            <div class="sidebar-footer">VERSION 1.0.0</div>
+            <!-- SIDEBAR FOOTER -->
+            <div class="sidebar-footer">
+                VERSION 1.2.0
+            </div>
+
         </aside>
 
+        <!-- MAIN CONTENT -->
         <main class="content">
+
+            <!-- HEADER -->
             <header>
-                <h2 id="page-title">Home</h2>
-                <button id="close-btn" aria-label="Close menu">×</button>
+
+                <div class="header-info">
+                    <h2 id="page-title">Home</h2>
+
+                    <div class="header-status">
+                        <span class="status-dot"></span>
+                        <span>UI ONLINE</span>
+                        <span id="live-clock">00:00:00</span>
+                    </div>
+                </div>
+
+                <button
+                    id="close-btn"
+                    aria-label="Close menu"
+                    type="button"
+                >
+                    &times;
+                </button>
+
             </header>
 
+            <!-- HOME TAB -->
             <section id="home" class="tab active">
+
                 <h3>Welcome to ICESPY</h3>
+
                 <p>Your custom FiveM interface.</p>
+
                 <div class="panel">
                     <span>Menu Status</span>
                     <strong>READY</strong>
                 </div>
+
+                <div class="panel">
+                    <span>Interface Version</span>
+                    <strong>v1.2.0</strong>
+                </div>
+
             </section>
 
+            <!-- PLAYER TAB -->
             <section id="player" class="tab">
+
                 <h3>Player</h3>
+
                 <p>Player information and preferences.</p>
+
+                <div class="panel">
+                    <span>Player Dashboard</span>
+                    <strong>READY</strong>
+                </div>
+
             </section>
 
+            <!-- VEHICLE TAB -->
             <section id="vehicle" class="tab">
+
                 <h3>Vehicle</h3>
+
                 <p>Vehicle information and preferences.</p>
+
+                <div class="panel">
+                    <span>Vehicle Dashboard</span>
+                    <strong>READY</strong>
+                </div>
+
             </section>
 
+            <!-- SETTINGS TAB -->
             <section id="settings" class="tab">
+
                 <h3>Settings</h3>
-                <p>Appearance and configuration.</p>
+
+                <p>Customize your ICESPY interface.</p>
+
+                <div class="panel">
+                    <span>Current Theme</span>
+                    <strong>BLUE & BLACK</strong>
+                </div>
+
+                <div class="panel">
+                    <span>Interface Version</span>
+                    <strong>v1.2.0</strong>
+                </div>
+
             </section>
+
         </main>
     </div>
 
+    <!-- ICESPY JAVASCRIPT -->
     <script src="script.js"></script>
+
 </body>
 </html>
