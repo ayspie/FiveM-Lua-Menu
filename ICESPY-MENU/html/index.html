@@ -25,19 +25,27 @@
 
             <!-- NAVIGATION -->
             <nav>
-                <button class="nav-btn active" data-tab="home">
+                <button class="nav-btn active"
+                        data-tab="home"
+                        type="button">
                     Home
                 </button>
 
-                <button class="nav-btn" data-tab="player">
+                <button class="nav-btn"
+                        data-tab="player"
+                        type="button">
                     Player
                 </button>
 
-                <button class="nav-btn" data-tab="vehicle">
+                <button class="nav-btn"
+                        data-tab="vehicle"
+                        type="button">
                     Vehicle
                 </button>
 
-                <button class="nav-btn" data-tab="settings">
+                <button class="nav-btn"
+                        data-tab="settings"
+                        type="button">
                     Settings
                 </button>
             </nav>
@@ -68,8 +76,7 @@
                 <button
                     id="close-btn"
                     aria-label="Close menu"
-                    type="button"
-                >
+                    type="button">
                     &times;
                 </button>
 
@@ -79,7 +86,6 @@
             <section id="home" class="tab active">
 
                 <h3>Welcome to ICESPY</h3>
-
                 <p>Your custom FiveM interface.</p>
 
                 <div class="panel">
@@ -98,7 +104,6 @@
             <section id="player" class="tab">
 
                 <h3>Player</h3>
-
                 <p>Player information and preferences.</p>
 
                 <div class="panel">
@@ -112,7 +117,6 @@
             <section id="vehicle" class="tab">
 
                 <h3>Vehicle</h3>
-
                 <p>Vehicle information and preferences.</p>
 
                 <div class="panel">
@@ -125,23 +129,69 @@
             <!-- SETTINGS TAB -->
             <section id="settings" class="tab">
 
-                <h3>Settings</h3>
-
+                <h3>Appearance Settings</h3>
                 <p>Customize your ICESPY interface.</p>
 
-                <div class="panel">
-                    <span>Current Theme</span>
-                    <strong>BLUE & BLACK</strong>
+                <!-- BLUE GLOW CONTROL -->
+                <div class="settings-panel">
+
+                    <label for="glow-slider">
+                        Blue Glow Intensity
+                        <span id="glow-value">50%</span>
+                    </label>
+
+                    <input
+                        type="range"
+                        id="glow-slider"
+                        min="0"
+                        max="100"
+                        value="50">
+
                 </div>
 
-                <div class="panel">
-                    <span>Interface Version</span>
-                    <strong>v1.2.0</strong>
+                <!-- BACKGROUND OPACITY -->
+                <div class="settings-panel">
+
+                    <label for="opacity-slider">
+                        Background Opacity
+                        <span id="opacity-value">85%</span>
+                    </label>
+
+                    <input
+                        type="range"
+                        id="opacity-slider"
+                        min="30"
+                        max="100"
+                        value="85">
+
                 </div>
+
+                <!-- ANIMATED BLUE BORDER -->
+                <div class="settings-panel">
+
+                    <label for="animation-toggle">
+                        Animated Blue Border
+                    </label>
+
+                    <input
+                        type="checkbox"
+                        id="animation-toggle"
+                        checked>
+
+                </div>
+
+                <!-- RESET APPEARANCE -->
+                <button
+                    id="reset-theme"
+                    class="settings-button"
+                    type="button">
+                    Reset Appearance
+                </button>
 
             </section>
 
         </main>
+
     </div>
 
     <!-- ICESPY JAVASCRIPT -->
