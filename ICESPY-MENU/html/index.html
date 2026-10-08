@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICESPY MENU</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="menu" class="menu hidden">
+        <aside class="sidebar">
+            <div class="brand">
+                <h1>ICESPY</h1>
+                <p>PREMIUM LUA MENU</p>
+            </div>
+
+            <nav>
+                <button class="nav-btn active" data-tab="home">Home</button>
+                <button class="nav-btn" data-tab="player">Player</button>
+                <button class="nav-btn" data-tab="vehicle">Vehicle</button>
+                <button class="nav-btn" data-tab="settings">Settings</button>
+            </nav>
+
+            <div class="sidebar-footer">VERSION 1.0.0</div>
+        </aside>
+
+        <main class="content">
+            <header>
+                <h2 id="page-title">Home</h2>
+                <button id="close-btn" aria-label="Close menu">×</button>
+            </header>
+
+            <section id="home" class="tab active">
+                <h3>Welcome to ICESPY</h3>
+                <p>Your custom FiveM interface.</p>
+                <div class="panel">
+                    <span>Menu Status</span>
+                    <strong>READY</strong>
+                </div>
+            </section>
+
+            <section id="player" class="tab">
+                <h3>Player</h3>
+                <p>Player information and preferences.</p>
+            </section>
+
+            <section id="vehicle" class="tab">
+                <h3>Vehicle</h3>
+                <p>Vehicle information and preferences.</p>
+            </section>
+
+            <section id="settings" class="tab">
+                <h3>Settings</h3>
+                <p>Appearance and configuration.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
