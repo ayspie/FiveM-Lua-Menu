@@ -241,3 +241,130 @@ header h2 {
         width: 190px;
     }
 }
+
+
+/* ==========================================
+   ICESPY MENU v1.2.0
+   Dashboard & Visual Enhancements
+   ========================================== */
+
+/* HEADER INFORMATION */
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.header-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #91A6BF;
+}
+
+/* ANIMATED STATUS INDICATOR */
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+
+    background: #00C8FF;
+    border-radius: 50%;
+
+    box-shadow: 0 0 10px #009DFF;
+    animation: icespyPulse 2s ease-in-out infinite;
+}
+
+@keyframes icespyPulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 12px #009DFF;
+    }
+
+    50% {
+        opacity: 0.45;
+        box-shadow: 0 0 4px #007EC7;
+    }
+}
+
+/* LIVE CLOCK */
+
+#live-clock {
+    margin-left: 8px;
+    padding: 5px 9px;
+
+    color: #62C4FF;
+    background: rgba(0, 126, 199, 0.12);
+    border: 1px solid rgba(0, 126, 199, 0.35);
+    border-radius: 6px;
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* ANIMATED MENU BORDER */
+
+.menu {
+    transition: box-shadow 0.3s ease;
+    animation: icespyBorderGlow 4s ease-in-out infinite;
+}
+
+@keyframes icespyBorderGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 12px rgba(0, 126, 199, 0.25),
+            inset 0 0 12px rgba(0, 126, 199, 0.05);
+    }
+
+    50% {
+        box-shadow:
+            0 0 28px rgba(0, 157, 255, 0.5),
+            inset 0 0 16px rgba(0, 126, 199, 0.1);
+    }
+}
+
+/* IMPROVED DASHBOARD PANELS */
+
+.panel {
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.panel:hover {
+    border-color: #009DFF;
+    background: rgba(0, 126, 199, 0.12);
+    box-shadow: 0 0 15px rgba(0, 157, 255, 0.12);
+}
+
+/* RESPONSIVE HEADER */
+
+@media (max-width: 600px) {
+    .header-status {
+        flex-wrap: wrap;
+        font-size: 10px;
+    }
+
+    #live-clock {
+        margin-left: 0;
+    }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    .menu,
+    .status-dot,
+    .tab {
+        animation: none;
+    }
+}
