@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICESPY - Embedded UI Test</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #080d16;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 25px;
+            color: #009DFF;
+        }
+
+        iframe {
+            display: block;
+            width: 100%;
+            height: 650px;
+            border: 1px solid #007EC7;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>ICESPY v1.6.0 - Embedded UI Test</h2>
+
+    <iframe
+        src="https://ayspie.github.io/FiveM-Lua-Menu/ICESPY-MENU/html/"
+        title="ICESPY Menu">
+    </iframe>
+
+</body>
+</html>
