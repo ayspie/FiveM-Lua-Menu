@@ -113,12 +113,25 @@ document.addEventListener("keydown", (event) => {
 window.addEventListener("message", (event) => {
     // Only accept messages from this page or a host
     // that provides a null source.
-    if (event.source !== window && event.source !== null) {
+  
+/* ==========================================
+   ICESPY v1.4.0 - MESSAGE CONTROLLER
+   ========================================== */
+
+window.addEventListener("message", (event) => {
+
+    // Accept messages from this page or the
+    // supported embedding environment.
+    if (
+        event.source !== window &&
+        event.source !== null
+    ) {
         return;
     }
 
     let data = event.data;
 
+    // Support JSON strings and objects.
     if (typeof data === "string") {
         try {
             data = JSON.parse(data);
@@ -127,11 +140,17 @@ window.addEventListener("message", (event) => {
         }
     }
 
-    if (!data || typeof data !== "object") {
+    if (
+        !data ||
+        typeof data !== "object" ||
+        Array.isArray(data)
+    ) {
         return;
     }
 
     switch (data.action) {
+
+        // MENU CONTROLS
         case "toggleMenu":
             toggleMenu(data.show);
             break;
@@ -148,9 +167,40 @@ window.addEventListener("message", (event) => {
             closeMenu();
             break;
 
+        // NAVIGATION
         case "switchTab":
             if (typeof data.tab === "string") {
                 switchTab(data.tab);
+            }
+            break;
+
+        // PLAYER DASHBOARD
+        case "updatePlayer":
+            if (
+                data.player &&
+                typeof data.player === "object" &&
+                !Array.isArray(data.player)
+            ) {
+                updatePlayerDashboard(data.player);
+
+                console.log(
+                    "[ICESPY] Player Dashboard updated"
+                );
+            }
+            break;
+
+        // VEHICLE DASHBOARD
+        case "updateVehicle":
+            if (
+                data.vehicle &&
+                typeof data.vehicle === "object" &&
+                !Array.isArray(data.vehicle)
+            ) {
+                updateVehicleDashboard(data.vehicle);
+
+                console.log(
+                    "[ICESPY] Vehicle Dashboard updated"
+                );
             }
             break;
 
@@ -158,6 +208,7 @@ window.addEventListener("message", (event) => {
             break;
     }
 });
+
 
 // ==========================================
 // LIVE CLOCK
