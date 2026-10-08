@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ICESPY MENU v1.3.0</title>
+    <title>ICESPY MENU v1.4.0</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -24,38 +24,29 @@
 
             <!-- NAVIGATION -->
             <nav>
-                <button
-                    class="nav-btn active"
-                    data-tab="home"
-                    type="button">
+                <button class="nav-btn active"
+                        data-tab="home" type="button">
                     Home
                 </button>
 
-                <button
-                    class="nav-btn"
-                    data-tab="player"
-                    type="button">
+                <button class="nav-btn"
+                        data-tab="player" type="button">
                     Player
                 </button>
 
-                <button
-                    class="nav-btn"
-                    data-tab="vehicle"
-                    type="button">
+                <button class="nav-btn"
+                        data-tab="vehicle" type="button">
                     Vehicle
                 </button>
 
-                <button
-                    class="nav-btn"
-                    data-tab="settings"
-                    type="button">
+                <button class="nav-btn"
+                        data-tab="settings" type="button">
                     Settings
                 </button>
             </nav>
 
-            <!-- SIDEBAR FOOTER -->
             <div class="sidebar-footer">
-                VERSION 1.3.0
+                VERSION 1.4.0
             </div>
 
         </aside>
@@ -75,10 +66,9 @@
                     </div>
                 </div>
 
-                <button
-                    id="close-btn"
-                    aria-label="Close menu"
-                    type="button">
+                <button id="close-btn"
+                        aria-label="Close menu"
+                        type="button">
                     &times;
                 </button>
             </header>
@@ -93,7 +83,6 @@
                     <p>Your personalized interface dashboard.</p>
                 </div>
 
-                <!-- DASHBOARD CARDS -->
                 <div class="dashboard-grid">
 
                     <div class="dashboard-card">
@@ -112,37 +101,30 @@
 
                     <div class="dashboard-card">
                         <span>Active Theme</span>
-                        <strong>
-                            BLUE &amp; BLACK
-                        </strong>
+                        <strong>BLUE &amp; BLACK</strong>
                     </div>
 
                     <div class="dashboard-card">
                         <span>Available Tabs</span>
-                        <strong>
-                            4 MODULES
-                        </strong>
+                        <strong>4 MODULES</strong>
                     </div>
 
                 </div>
 
-                <!-- QUICK ACTIONS -->
                 <div class="dashboard-actions">
                     <h4>Quick Actions</h4>
 
                     <div class="dashboard-action-buttons">
 
-                        <button
-                            type="button"
-                            class="dashboard-action"
-                            data-open-tab="settings">
+                        <button type="button"
+                                class="dashboard-action"
+                                data-open-tab="settings">
                             Open Settings
                         </button>
 
-                        <button
-                            type="button"
-                            class="dashboard-action"
-                            data-open-tab="player">
+                        <button type="button"
+                                class="dashboard-action"
+                                data-open-tab="player">
                             Player Dashboard
                         </button>
 
@@ -152,16 +134,77 @@
             </section>
 
             <!-- =====================================
-                 PLAYER TAB
+                 PLAYER - ADVANCED DASHBOARD
                  ===================================== -->
             <section id="player" class="tab">
 
-                <h3>Player</h3>
-                <p>Player information and preferences.</p>
+                <div class="player-header">
+                    <div>
+                        <h3>Player Dashboard</h3>
+                        <p>Player information and connection status.</p>
+                    </div>
 
-                <div class="panel">
-                    <span>Player Dashboard</span>
-                    <strong>READY</strong>
+                    <span id="player-status-badge"
+                          class="player-badge">
+                        NOT CONNECTED
+                    </span>
+                </div>
+
+                <!-- PLAYER INFORMATION CARDS -->
+                <div class="player-grid">
+
+                    <div class="player-card">
+                        <span>Player Name</span>
+                        <strong id="player-name">
+                            Not Connected
+                        </strong>
+                    </div>
+
+                    <div class="player-card">
+                        <span>Player ID</span>
+                        <strong id="player-id">
+                            —
+                        </strong>
+                    </div>
+
+                    <div class="player-card">
+                        <span>Health</span>
+                        <strong id="player-health">
+                            —
+                        </strong>
+                    </div>
+
+                    <div class="player-card">
+                        <span>Armor</span>
+                        <strong id="player-armor">
+                            —
+                        </strong>
+                    </div>
+
+                </div>
+
+                <!-- PLAYER CONNECTION STATUS -->
+                <div class="player-connection">
+
+                    <div class="player-connection-header">
+                        <h4>Connection Status</h4>
+
+                        <span id="player-connection-label">
+                            OFFLINE
+                        </span>
+                    </div>
+
+                    <p id="player-connection-message">
+                        Waiting for player information from
+                        an authorized game integration.
+                    </p>
+
+                </div>
+
+                <!-- PLAYER DASHBOARD FOOTER -->
+                <div class="player-footer">
+                    <span>ICESPY PLAYER MODULE</span>
+                    <span>v1.4.0</span>
                 </div>
 
             </section>
@@ -191,6 +234,7 @@
 
                 <!-- BLUE GLOW CONTROL -->
                 <div class="settings-panel">
+
                     <label for="glow-slider">
                         Blue Glow Intensity
                         <span id="glow-value">50%</span>
@@ -202,10 +246,12 @@
                         min="0"
                         max="100"
                         value="50">
+
                 </div>
 
                 <!-- BACKGROUND OPACITY -->
                 <div class="settings-panel">
+
                     <label for="opacity-slider">
                         Background Opacity
                         <span id="opacity-value">85%</span>
@@ -217,10 +263,12 @@
                         min="30"
                         max="100"
                         value="85">
+
                 </div>
 
                 <!-- ANIMATED BLUE BORDER -->
                 <div class="settings-panel">
+
                     <label for="animation-toggle">
                         Animated Blue Border
                     </label>
@@ -229,6 +277,7 @@
                         type="checkbox"
                         id="animation-toggle"
                         checked>
+
                 </div>
 
                 <!-- RESET APPEARANCE -->
