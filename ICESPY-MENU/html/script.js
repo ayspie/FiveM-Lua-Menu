@@ -383,3 +383,58 @@ console.log("================================");
 console.log("       ICESPY MENU v1.2.0       ");
 console.log("       UI Initialized           ");
 console.log("================================");
+
+
+/* ICESPY v1.2.0 - NOTIFICATIONS */
+
+function showNotification(message, duration = 3000) {
+    const container = document.getElementById(
+        "notification-container"
+    );
+
+    if (!container) return;
+
+    const notification = document.createElement("div");
+    notification.className = "icespy-notification";
+
+    const title = document.createElement("strong");
+    title.textContent = "ICESPY";
+
+    const description = document.createElement("p");
+    description.textContent = message;
+
+    notification.append(title, description);
+    container.appendChild(notification);
+
+    // Avoid unlimited notifications.
+    while (container.children.length > 3) {
+        container.firstElementChild.remove();
+    }
+
+    setTimeout(() => {
+        notification.remove();
+    }, duration);
+}
+
+// Notify when the theme is reset.
+resetThemeButton?.addEventListener("click", () => {
+    showNotification("Appearance restored to default.");
+});
+
+// Notify when a slider adjustment is finished.
+glowSlider?.addEventListener("change", () => {
+    showNotification("Blue glow setting saved.");
+});
+
+opacitySlider?.addEventListener("change", () => {
+    showNotification("Background opacity saved.");
+});
+
+animationToggle?.addEventListener("change", () => {
+    showNotification(
+        animationToggle.checked
+            ? "Border animation enabled."
+            : "Border animation disabled."
+    );
+});
+
