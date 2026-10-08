@@ -193,3 +193,13 @@ setTimeout(() => {
         tab: "settings"
     }, window.location.origin);
 }, 2000);
+
+// ICESPY Message Controller Test
+setTimeout(() => {
+    console.log("[ICESPY] Sending test message...");
+
+    window.postMessage({
+        action: "switchTab",
+        tab: "settings"
+    }, "*");
+}, 2000);
