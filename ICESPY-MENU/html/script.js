@@ -1,18 +1,21 @@
 
 /* ==========================================
    ICESPY MENU - JavaScript Controller
-   Version: 1.1.0
+   Version: 1.2.0
    Theme: Blue & Black
    ========================================== */
 
+// ==========================================
 // MENU ELEMENTS
+// ==========================================
+
 const menu = document.getElementById("menu");
 const navButtons = document.querySelectorAll(".nav-btn");
 const tabs = document.querySelectorAll(".tab");
 const pageTitle = document.getElementById("page-title");
 const closeButton = document.getElementById("close-btn");
 
-// Detect FiveM NUI environment
+// Detect standard FiveM NUI environment.
 const isFiveM = typeof GetParentResourceName === "function";
 
 // ==========================================
@@ -47,7 +50,6 @@ function switchTab(tabName) {
     console.log("[ICESPY] Switched to:", tabName);
 }
 
-// Register navigation buttons
 navButtons.forEach((button) => {
     button.addEventListener("click", () => {
         switchTab(button.dataset.tab);
@@ -96,33 +98,27 @@ function closeMenu() {
     }
 }
 
-// Close button
 closeButton.addEventListener("click", closeMenu);
 
-// Escape key
 document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
+    if (event.key === "Escape" && !menu.classList.contains("hidden")) {
         closeMenu();
     }
 });
 
 // ==========================================
-// DUI / NUI MESSAGE CONTROLLER
+// NUI / BROWSER MESSAGE CONTROLLER
 // ==========================================
 
 window.addEventListener("message", (event) => {
-    // Accept messages from this page or the embedding host.
-    // This controller only performs local UI actions.
-    if (
-        event.source !== window &&
-        event.source !== null
-    ) {
+    // Only accept messages from this page or a host
+    // that provides a null source.
+    if (event.source !== window && event.source !== null) {
         return;
     }
 
     let data = event.data;
 
-    // Support JSON strings and JavaScript objects
     if (typeof data === "string") {
         try {
             data = JSON.parse(data);
@@ -136,7 +132,6 @@ window.addEventListener("message", (event) => {
     }
 
     switch (data.action) {
-
         case "toggleMenu":
             toggleMenu(data.show);
             break;
@@ -160,34 +155,13 @@ window.addEventListener("message", (event) => {
             break;
 
         default:
-            // Ignore unrelated messages.
             break;
     }
 });
 
 // ==========================================
-// BROWSER PREVIEW MODE
+// LIVE CLOCK
 // ==========================================
-
-if (!isFiveM) {
-    openMenu();
-    console.log("[ICESPY] Browser preview mode enabled");
-} else {
-    hideMenu();
-    console.log("[ICESPY] FiveM NUI mode detected");
-}
-
-// ==========================================
-// INITIALIZATION
-// ==========================================
-
-console.log("================================");
-console.log("       ICESPY MENU v1.1         ");
-console.log("       UI Initialized           ");
-console.log("================================");
-
-
-/* ICESPY v1.2.0 - LIVE CLOCK */
 
 function updateIcespyClock() {
     const clock = document.getElementById("live-clock");
@@ -200,14 +174,23 @@ function updateIcespyClock() {
 }
 
 updateIcespyClock();
+setInterval(updateIcespyClock, 1000);
 
-
-/* ICESPY v1.2 - APPEARANCE CONTROLS */
+// ==========================================
+// APPEARANCE ELEMENTS
+// ==========================================
 
 const glowSlider = document.getElementById("glow-slider");
 const opacitySlider = document.getElementById("opacity-slider");
 const animationToggle = document.getElementById("animation-toggle");
 const resetThemeButton = document.getElementById("reset-theme");
+
+const glowValue = document.getElementById("glow-value");
+const opacityValue = document.getElementById("opacity-value");
+
+// ==========================================
+// DEFAULT THEME
+// ==========================================
 
 const defaultTheme = {
     glow: 50,
@@ -215,26 +198,77 @@ const defaultTheme = {
     animated: true
 };
 
+const themeStorageKey = "icespy-theme";
+
+// Keep all appearance settings in the range
+// supported by the sliders.
+function clamp(value, min, max, fallback) {
+    const number = Number(value);
+
+    if (!Number.isFinite(number)) {
+        return fallback;
+    }
+
+    return Math.max(min, Math.min(max, number));
+}
+
+// ==========================================
+// APPLY APPEARANCE SETTINGS
+// ==========================================
+
 function applyTheme(settings) {
-    const glow = Math.max(0, Math.min(100, Number(settings.glow)));
-    const opacity = Math.max(30, Math.min(100, Number(settings.opacity)));
-
-    glowSlider.value = glow;
-    opacitySlider.value = opacity;
-    animationToggle.checked = settings.animated;
-
-    document.getElementById("glow-value").textContent = glow + "%";
-    document.getElementById("opacity-value").textContent = opacity + "%";
-
-    menu.style.background = `rgba(11, 15, 25, ${opacity / 100})`;
-
-    menu.style.setProperty(
-        "--glow-strength",
-        glow / 100
+    const glow = clamp(
+        settings.glow,
+        0,
+        100,
+        defaultTheme.glow
     );
 
-    menu.classList.toggle("no-animation", !settings.animated);
+    const opacity = clamp(
+        settings.opacity,
+        30,
+        100,
+        defaultTheme.opacity
+    );
+
+    const animated =
+        typeof settings.animated === "boolean"
+            ? settings.animated
+            : defaultTheme.animated;
+
+    // Update settings controls.
+    glowSlider.value = glow;
+    opacitySlider.value = opacity;
+    animationToggle.checked = animated;
+
+    // Update displayed percentages.
+    glowValue.textContent = glow + "%";
+    opacityValue.textContent = opacity + "%";
+
+    // Update the CSS variables used in style.css.
+    menu.style.setProperty(
+        "--glow-strength",
+        String(glow / 100)
+    );
+
+    menu.style.setProperty(
+        "--menu-opacity",
+        String(opacity / 100)
+    );
+
+    // Turn the border animation on or off.
+    menu.classList.toggle("no-animation", !animated);
+
+    console.log("[ICESPY] Appearance updated:", {
+        glow,
+        opacity,
+        animated
+    });
 }
+
+// ==========================================
+// SAVE APPEARANCE SETTINGS
+// ==========================================
 
 function saveTheme() {
     const settings = {
@@ -246,34 +280,106 @@ function saveTheme() {
     applyTheme(settings);
 
     try {
-        localStorage.setItem("icespy-theme", JSON.stringify(settings));
+        localStorage.setItem(
+            themeStorageKey,
+            JSON.stringify(settings)
+        );
     } catch (error) {
-        console.warn("[ICESPY] Theme could not be saved:", error);
+        console.warn(
+            "[ICESPY] Could not save appearance:",
+            error
+        );
     }
 }
 
-glowSlider.addEventListener("input", saveTheme);
-opacitySlider.addEventListener("input", saveTheme);
-animationToggle.addEventListener("change", saveTheme);
+// ==========================================
+// LOAD SAVED SETTINGS
+// ==========================================
 
-resetThemeButton.addEventListener("click", () => {
-    applyTheme(defaultTheme);
-    saveTheme();
-});
+function loadTheme() {
+    try {
+        const storedTheme = localStorage.getItem(
+            themeStorageKey
+        );
 
-let savedTheme = defaultTheme;
+        if (!storedTheme) {
+            return { ...defaultTheme };
+        }
 
-try {
-    const stored = JSON.parse(localStorage.getItem("icespy-theme"));
-    if (stored && typeof stored === "object") {
-        savedTheme = { ...defaultTheme, ...stored };
+        const parsed = JSON.parse(storedTheme);
+
+        if (
+            !parsed ||
+            typeof parsed !== "object" ||
+            Array.isArray(parsed)
+        ) {
+            return { ...defaultTheme };
+        }
+
+        return {
+            ...defaultTheme,
+            ...parsed
+        };
+    } catch (error) {
+        console.warn(
+            "[ICESPY] Could not load saved appearance:",
+            error
+        );
+
+        return { ...defaultTheme };
     }
-} catch (error) {
-    console.warn("[ICESPY] Using default appearance.");
 }
 
-applyTheme(savedTheme);
+// ==========================================
+// SETTINGS EVENT LISTENERS
+// ==========================================
 
+if (
+    glowSlider &&
+    opacitySlider &&
+    animationToggle &&
+    resetThemeButton &&
+    glowValue &&
+    opacityValue
+) {
+    glowSlider.addEventListener("input", saveTheme);
 
-setInterval(updateIcespyClock, 1000);
+    opacitySlider.addEventListener("input", saveTheme);
 
+    animationToggle.addEventListener("change", saveTheme);
+
+    resetThemeButton.addEventListener("click", () => {
+        applyTheme(defaultTheme);
+        saveTheme();
+
+        console.log("[ICESPY] Appearance reset");
+    });
+
+    // Apply stored preferences on startup.
+    applyTheme(loadTheme());
+} else {
+    console.warn(
+        "[ICESPY] Appearance controls missing from index.html"
+    );
+}
+
+// ==========================================
+// BROWSER PREVIEW MODE
+// ==========================================
+
+if (!isFiveM) {
+    openMenu();
+    console.log("[ICESPY] Browser preview mode enabled");
+} else {
+    hideMenu();
+    console.log("[ICESPY] Standard FiveM NUI mode detected");
+}
+
+// ==========================================
+// INITIALIZATION
+// ==========================================
+
+console.log("================================");
+console.log("       ICESPY MENU v1.2.0       ");
+console.log("       UI Initialized           ");
+console.log("================================");
