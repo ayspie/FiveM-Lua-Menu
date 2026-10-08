@@ -198,6 +198,12 @@ window.addEventListener("message", (event) => {
             }
             break;
 
+          
+case "ping":
+    console.log("[ICESPY] UI message received successfully");
+    break;
+
+
         default:
             break;
     }
