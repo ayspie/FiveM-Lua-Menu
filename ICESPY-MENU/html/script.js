@@ -185,3 +185,11 @@ console.log("================================");
 console.log("       ICESPY MENU v1.1         ");
 console.log("       UI Initialized           ");
 console.log("================================");
+
+// ICESPY - Temporary message test
+setTimeout(() => {
+    window.postMessage({
+        action: "switchTab",
+        tab: "settings"
+    }, window.location.origin);
+}, 2000);
