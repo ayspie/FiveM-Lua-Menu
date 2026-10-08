@@ -368,3 +368,63 @@ header h2 {
         animation: none;
     }
 }
+
+
+/* ICESPY v1.2 - APPEARANCE SETTINGS */
+
+.settings-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(10, 18, 32, 0.8);
+    border: 1px solid rgba(0, 126, 199, 0.4);
+    border-radius: 8px;
+}
+
+.settings-panel label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 13px;
+}
+
+.settings-panel label span {
+    color: #62c4ff;
+}
+
+.settings-panel input[type="range"] {
+    width: 100%;
+    accent-color: #007ec7;
+    cursor: pointer;
+}
+
+.settings-panel input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #007ec7;
+    cursor: pointer;
+}
+
+.settings-button {
+    margin-top: 15px;
+    padding: 12px 18px;
+    width: 100%;
+    border: 1px solid #007ec7;
+    border-radius: 8px;
+    background: rgba(0, 126, 199, 0.18);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.settings-button:hover {
+    background: rgba(0, 157, 255, 0.35);
+}
+
+/* Disable border animation when requested */
+.menu.no-animation {
+    animation: none !important;
+}
