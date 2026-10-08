@@ -106,14 +106,6 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-// ==========================================
-// NUI / BROWSER MESSAGE CONTROLLER
-// ==========================================
-
-window.addEventListener("message", (event) => {
-    // Only accept messages from this page or a host
-    // that provides a null source.
-  
 /* ==========================================
    ICESPY v1.4.0 - MESSAGE CONTROLLER
    ========================================== */
