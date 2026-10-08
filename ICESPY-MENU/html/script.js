@@ -748,3 +748,12 @@ setTimeout(() => {
     console.log("[ICESPY] Connection test sent");
 }, 3000);
 
+
+/* ICESPY v1.6.0 - TEMPORARY MESSAGE TEST */
+
+setTimeout(() => {
+    window.postMessage({
+        action: "ping"
+    }, "*");
+}, 2000);
+
