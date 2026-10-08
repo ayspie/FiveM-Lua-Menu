@@ -185,9 +185,3 @@ console.log("================================");
 console.log("       ICESPY MENU v1.1         ");
 console.log("       UI Initialized           ");
 console.log("================================");
-
-// Temporary ICESPY navigation test
-setTimeout(() => {
-    console.log("Testing ICESPY Vehicle tab...");
-    switchTab("vehicle");
-}, 2000);
