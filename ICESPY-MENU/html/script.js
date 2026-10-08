@@ -186,3 +186,20 @@ console.log("       ICESPY MENU v1.1         ");
 console.log("       UI Initialized           ");
 console.log("================================");
 
+
+/* ICESPY v1.2.0 - LIVE CLOCK */
+
+function updateIcespyClock() {
+    const clock = document.getElementById("live-clock");
+
+    if (!clock) return;
+
+    clock.textContent = new Date().toLocaleTimeString("en-GB", {
+        hour12: false
+    });
+}
+
+updateIcespyClock();
+
+setInterval(updateIcespyClock, 1000);
+
