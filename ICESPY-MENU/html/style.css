@@ -610,3 +610,67 @@ input:focus-visible {
             rgba(0, 157, 255, 0.6);
     }
 }
+
+
+/* ICESPY v1.2.0 - NOTIFICATION SYSTEM */
+
+.notification-container {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    pointer-events: none;
+}
+
+.icespy-notification {
+    width: 300px;
+    max-width: calc(100vw - 50px);
+    padding: 14px 16px;
+
+    background: rgba(11, 18, 32, 0.96);
+    border: 1px solid #007EC7;
+    border-left: 4px solid #009DFF;
+    border-radius: 9px;
+
+    box-shadow: 0 0 18px rgba(0, 157, 255, 0.3);
+    color: #FFFFFF;
+
+    font-size: 13px;
+    pointer-events: auto;
+
+    animation: notificationIn 0.25s ease;
+}
+
+.icespy-notification strong {
+    display: block;
+    color: #62C4FF;
+    margin-bottom: 5px;
+}
+
+.icespy-notification p {
+    margin: 0;
+    color: #BACADB;
+}
+
+@keyframes notificationIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .icespy-notification {
+        animation: none;
+    }
+}
