@@ -428,3 +428,30 @@ header h2 {
 .menu.no-animation {
     animation: none !important;
 }
+
+
+/* Dynamic blue-glow intensity */
+
+.menu:not(.no-animation) {
+    animation: icespyDynamicGlow 4s ease-in-out infinite;
+}
+
+.menu.no-animation {
+    box-shadow:
+        0 0 calc(30px * var(--glow-strength, 0.5))
+        rgba(0, 157, 255, 0.6);
+}
+
+@keyframes icespyDynamicGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 calc(14px * var(--glow-strength, 0.5))
+            rgba(0, 126, 199, 0.45);
+    }
+
+    50% {
+        box-shadow:
+            0 0 calc(40px * var(--glow-strength, 0.5))
+            rgba(0, 157, 255, 0.8);
+    }
+}
