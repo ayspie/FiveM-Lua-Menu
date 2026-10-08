@@ -725,3 +725,20 @@ setInterval(updateConnectionDisplay, 1000);
 
 
 
+/* ICESPY v1.5.0 - TEMPORARY CONNECTION TEST */
+
+setTimeout(() => {
+    window.postMessage({
+        action: "updatePlayer",
+        player: {
+            connected: true,
+            name: "ICESPY Test",
+            id: 10,
+            health: 100,
+            armor: 50
+        }
+    }, "*");
+
+    console.log("[ICESPY] Connection test sent");
+}, 3000);
+
