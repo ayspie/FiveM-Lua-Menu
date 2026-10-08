@@ -635,4 +635,28 @@ console.log("[ICESPY] Player & Vehicle dashboard controller ready");
 
 
 
+/* ICESPY v1.4.0 - TEMPORARY MESSAGE TEST */
+
+window.postMessage({
+    action: "updatePlayer",
+    player: {
+        connected: true,
+        name: "ICESPY Test",
+        id: 10,
+        health: 100,
+        armor: 50
+    }
+}, "*");
+
+window.postMessage({
+    action: "updateVehicle",
+    vehicle: {
+        connected: true,
+        model: "Test Vehicle",
+        plate: "ICESPY",
+        engine: "100%",
+        speed: "60 km/h"
+    }
+}, "*");
+
 
