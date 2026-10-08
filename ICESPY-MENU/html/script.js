@@ -485,3 +485,108 @@ document.querySelectorAll("[data-open-tab]").forEach((button) => {
 
 console.log("[ICESPY] Advanced Dashboard initialized");
 
+
+/* ==========================================
+   ICESPY v1.4.0 - DATA DISPLAY CONTROLLER
+   Browser Preview / UI Only
+   ========================================== */
+
+function setDisplayText(id, value, fallback = "—") {
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    element.textContent =
+        value === null || value === undefined || value === ""
+            ? fallback
+            : String(value);
+}
+
+function updatePlayerDashboard(data = {}) {
+    const connected = data.connected === true;
+
+    setDisplayText(
+        "player-status-badge",
+        connected ? "CONNECTED" : "NOT CONNECTED"
+    );
+
+    setDisplayText(
+        "player-connection-label",
+        connected ? "CONNECTED" : "OFFLINE"
+    );
+
+    setDisplayText(
+        "player-connection-message",
+        connected
+            ? "Player information is available."
+            : "Waiting for player information from an authorized game integration."
+    );
+
+    setDisplayText(
+        "player-name",
+        connected ? data.name : "Not Connected"
+    );
+
+    setDisplayText(
+        "player-id",
+        connected ? data.id : "—"
+    );
+
+    setDisplayText(
+        "player-health",
+        connected ? data.health : "—"
+    );
+
+    setDisplayText(
+        "player-armor",
+        connected ? data.armor : "—"
+    );
+}
+
+function updateVehicleDashboard(data = {}) {
+    const connected = data.connected === true;
+
+    setDisplayText(
+        "vehicle-status-badge",
+        connected ? "IN VEHICLE" : "NOT IN VEHICLE"
+    );
+
+    setDisplayText(
+        "vehicle-connection-label",
+        connected ? "AVAILABLE" : "UNAVAILABLE"
+    );
+
+    setDisplayText(
+        "vehicle-connection-message",
+        connected
+            ? "Vehicle information is available."
+            : "Waiting for vehicle information from an authorized game integration."
+    );
+
+    setDisplayText(
+        "vehicle-model",
+        connected ? data.model : "Not Available"
+    );
+
+    setDisplayText(
+        "vehicle-plate",
+        connected ? data.plate : "—"
+    );
+
+    setDisplayText(
+        "vehicle-engine",
+        connected ? data.engine : "—"
+    );
+
+    setDisplayText(
+        "vehicle-speed",
+        connected ? data.speed : "—"
+    );
+}
+
+// Initialize placeholders.
+updatePlayerDashboard();
+updateVehicleDashboard();
+
+console.log("[ICESPY] Player & Vehicle dashboard controller ready");
+
+
