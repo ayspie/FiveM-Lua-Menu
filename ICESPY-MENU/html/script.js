@@ -590,24 +590,6 @@ updateVehicleDashboard();
 console.log("[ICESPY] Player & Vehicle dashboard controller ready");
 
 
-/* ICESPY v1.4.0 - TEMPORARY DASHBOARD TEST */
 
-updatePlayerDashboard({
-    connected: true,
-    name: "Test Player",
-    id: 12,
-    health: 100,
-    armor: 50
-});
-
-updateVehicleDashboard({
-    connected: true,
-    model: "Test Vehicle",
-    plate: "ICESPY",
-    engine: "100%",
-    speed: "60 km/h"
-});
-
-console.log("[ICESPY] Dashboard test data loaded");
 
 
