@@ -423,7 +423,7 @@ if (!isFiveM) {
 // ==========================================
 
 console.log("================================");
-console.log("       ICESPY MENU v1.2.0       ");
+console.log("       ICESPY MENU v1.4.0       ");
 console.log("       UI Initialized           ");
 console.log("================================");
 
