@@ -728,10 +728,6 @@ updateConnectionDisplay();
 setInterval(updateConnectionDisplay, 1000);
 
 
-    console.log("[ICESPY] Connection test sent");
-}, 3000);
-
-
 /* ICESPY v1.6.0 - TEMPORARY MESSAGE TEST */
 
 setTimeout(() => {
