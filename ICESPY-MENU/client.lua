@@ -1,30 +1,41 @@
 
--- ICESPY MENU v1.0.0
+-- ==========================================
+-- ICESPY MENU
 -- FiveM Client Controller
+-- Version: 1.1.0
+-- ==========================================
 
 local menuOpen = false
 
--- Open or close ICESPY
-local function ToggleMenu()
-    menuOpen = not menuOpen
+-- ==========================================
+-- MENU VISIBILITY CONTROLLER
+-- ==========================================
 
-    SetNuiFocus(menuOpen, menuOpen)
+local function SetMenuVisible(visible)
+    menuOpen = visible
 
+    -- Set FiveM NUI focus
+    SetNuiFocus(visible, visible)
+
+    -- Update HTML menu visibility
     SendNUIMessage({
         action = "toggleMenu",
-        show = menuOpen
+        show = visible
     })
 
     print("[ICESPY] Menu " ..
-        (menuOpen and "opened" or "closed"))
+        (visible and "opened" or "closed"))
 end
 
--- Register menu command
+-- ==========================================
+-- OPEN / CLOSE MENU
+-- ==========================================
+
 RegisterCommand("icespy", function()
-    ToggleMenu()
+    SetMenuVisible(not menuOpen)
 end, false)
 
--- Open menu with F5
+-- Open ICESPY using F5
 RegisterKeyMapping(
     "icespy",
     "Open ICESPY Menu",
@@ -32,25 +43,82 @@ RegisterKeyMapping(
     "F5"
 )
 
--- Handle close button and Escape key
+-- ==========================================
+-- NUI CLOSE CALLBACK
+-- ==========================================
+
 RegisterNUICallback("closeMenu", function(data, cb)
-    menuOpen = false
+    SetMenuVisible(false)
 
-    SetNuiFocus(false, false)
-
-    SendNUIMessage({
-        action = "toggleMenu",
-        show = false
+    cb({
+        success = true
     })
-
-    cb({ success = true })
 end)
 
--- Cleanup when resource stops
-AddEventHandler("onResourceStop", function(resource)
-    if resource == GetCurrentResourceName() then
+-- ==========================================
+-- TAB SWITCHING CONTROLLER
+-- ==========================================
+
+local allowedTabs = {
+    home = true,
+    player = true,
+    vehicle = true,
+    settings = true
+}
+
+local function SwitchMenuTab(tabName)
+    if type(tabName) ~= "string" then
+        print("[ICESPY] Invalid tab name")
+        return
+    end
+
+    tabName = tabName:lower()
+
+    if not allowedTabs[tabName] then
+        print("[ICESPY] Unknown tab: " .. tabName)
+        return
+    end
+
+    -- Open menu if closed
+    if not menuOpen then
+        SetMenuVisible(true)
+    end
+
+    -- Send selected tab to HTML
+    SendNUIMessage({
+        action = "switchTab",
+        tab = tabName
+    })
+
+    print("[ICESPY] Switched to tab: " .. tabName)
+end
+
+-- ==========================================
+-- TAB COMMAND
+-- ==========================================
+
+RegisterCommand("icespytab", function(source, args)
+    local tabName = args[1] or "home"
+
+    SwitchMenuTab(tabName)
+end, false)
+
+-- ==========================================
+-- RESOURCE CLEANUP
+-- ==========================================
+
+AddEventHandler("onResourceStop", function(resourceName)
+    if resourceName == GetCurrentResourceName() then
+        menuOpen = false
         SetNuiFocus(false, false)
     end
 end)
 
-print("[ICESPY] Client initialized successfully!")
+-- ==========================================
+-- INITIALIZATION
+-- ==========================================
+
+print("================================")
+print("       ICESPY MENU v1.1.0       ")
+print("       Client Initialized       ")
+print("================================")
